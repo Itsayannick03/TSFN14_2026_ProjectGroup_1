@@ -20,16 +20,19 @@ Compents breakdown
 
 Scalability Issues:
 - Risk of race condtiotions
-	Scince booking is handled concurently Doubble booking issues may occour if two persons try to book at the same time.
-- our system deoends on an email service and our database
+	Scince booking is handled concurently Double booking issues may occour if two persons try to book at the same time.
+- our system depends on an email service and our database
 - Resorce usage
 	Since we only have one entry point resource usage will most likley increase.
 
 
 Fault tollerance:
 - Single point of failure
-	If backend crashes, everything goes down same with
+	If backend crashes, everything goes down same with the server. 
 - No recovery
-	When the server goes down it will not automatically restart
-- Otherwise we have relativly good error messaging. The site wont go down in case of errors
+	When the server goes down it will not automatically restart. 
+ Otherwise we have relativly good error messaging. The site wont go down in case of errors. 
 
+Discussion: 
+Right now the system works well, but these scalability and fault-tolerance issues can become problems if the number of users increases. Because bookings are handled at the same time, there is a risk of race conditions, which could cause double bookings. The system also depends on a single backend, server and external services like the database and email service, so resource usage and failures can have a bigger impact as traffic grows. 
+Since there is only one backend entry point, all requests are handled by the same server, which increases CPU and memory usage when users increses. This can result in slower performance or even the whole system goes down. Especially because the backend is a single point of failure with no automatic recovery even though error handling is generally good and most errors do not bring the site down.
