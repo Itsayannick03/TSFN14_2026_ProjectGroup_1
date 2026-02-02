@@ -1,0 +1,35 @@
+Compents breakdown
+
+- Frontend:
+	Homepage
+	Booking Pages (Services, calendar, form etc)
+	Login/Registration
+	Profile page
+- Backend:
+	Server.js(Api endpoint)
+	Controllers
+		Booking controller
+		Service controller
+		user controller
+	Models
+		Booking model
+		Service model
+		Users model1
+- Database (Not stored localy)
+- Email Service
+
+Scalability Issues:
+- Risk of race condtiotions
+	Scince booking is handled concurently Doubble booking issues may occour if two persons try to book at the same time.
+- our system deoends on an email service and our database
+- Resorce usage
+	Since we only have one entry point resource usage will most likley increase.
+
+
+Fault tollerance:
+- Single point of failure
+	If backend crashes, everything goes down same with
+- No recovery
+	When the server goes down it will not automatically restart
+- Otherwise we have relativly good error messaging. The site wont go down in case of errors
+
