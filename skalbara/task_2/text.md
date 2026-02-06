@@ -1,3 +1,5 @@
+Task 2 
+
 1. Dubble booking 
 	- When two customers select a time slot at the same time and continue to booking the time will still be available util the customer has booked the time. 
 	- This can cause two customers to choose the same time and then have to start over because someone else booked the time first.
@@ -19,5 +21,6 @@
 
 5. Basic logging
    - Logger has been implemented in the system.
+
 
 
