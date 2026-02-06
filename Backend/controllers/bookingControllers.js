@@ -186,6 +186,10 @@ async function getAllBookingsForAdmin(req, res) {
   }
 }
 
-
+//Add new to create temporary booking 
+//Add new for time 
+//Add new to confirm temporary bookings
+//Add new for canceling temporary time
+//Add to selectDate, if aktiv reservation exists, if nor make one
 
 module.exports = { selectService, createBooking, getBookings, selectDate, getDate, deleteBooking, getUserBookings, getAllBookingsForAdmin };
