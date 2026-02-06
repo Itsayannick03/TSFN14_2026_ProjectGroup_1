@@ -15,7 +15,8 @@
     - The first step is to prepare the system to temporarily reserve a time slot until the booking is confirmed or the reservation expires.
 	
 4.  Begin refactoring 
-The first step in the refactoring plan is to  extend the existing booking model by introducing an expiresAt field which  uses a Date type to support time-based reservation logic. This field is initially set to null to represent a confirmed booking . When a user selects a time slot, the field is assigned a future timestamp, indicating temporary reservation. The reservation remains valid until the expiration time is reached, after which the time slot becomes available again if the booking has not been confirmed and the expireAt is set to null again.
+-The first step in the refactoring plan is to  extend the existing booking model by introducing an expiresAt field which  uses a Date type to support time-based reservation logic. This field is initially set to null to represent a confirmed booking . When a user selects a time slot, the field is assigned a future timestamp, indicating temporary reservation. The reservation remains valid until the expiration time is reached, after which the time slot becomes available again if the booking has not been confirmed and the expireAt is set to null again.
 
 5. Basic logging
-   Logger has been implemented in the system.
+   -Logger has been implemented in the system.
+
