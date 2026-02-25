@@ -13,7 +13,7 @@ Terraform will then automatically create all the necessary Kubernetes resources 
 See the screenshots below for steps of the process.
 
 
-screenshoots: 
+screenshoots:  
 
 
 
