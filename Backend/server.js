@@ -62,7 +62,10 @@ connectDB();
 
 //Simple test route
 app.get("/", (req, res) => {
+  const ip = req.socket.remoteAddress;
+  console.log(`${ip} Connected to backend`)
   res.send("API is running...");
+  
 });
 
 //Register
