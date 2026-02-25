@@ -29,12 +29,12 @@ resource "kubernetes_deployment" "app" {
       spec {
         container {
           name  = "hair-salon-container"
-          image = "hair-salon-app:1.0"
+          image = "hair-salon:1.0"
 
           image_pull_policy = "Never"
 
           port {
-            container_port = 5173
+            container_port = 5000
           }
         }
       }
@@ -54,8 +54,8 @@ resource "kubernetes_service" "app" {
     }
 
     port {
-      port        = 5173
-      target_port = 5173
+      port        = 5000
+      target_port = 5000
     }
 
     type = "NodePort"
