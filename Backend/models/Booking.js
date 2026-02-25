@@ -16,8 +16,12 @@ const bookingSchema = new mongoose.Schema({
     date: {
         type: Date,
         required: true
+    }, 
+     //Added expiresAt null when there is a confirmed booking
+    expiresAt: {
+        type: Date,
+        default: null,
     }
-
 });
 
 

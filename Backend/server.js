@@ -62,7 +62,10 @@ connectDB();
 
 //Simple test route
 app.get("/", (req, res) => {
+  const ip = req.socket.remoteAddress;
+  console.log(`${ip} Connected to backend`)
   res.send("API is running...");
+  
 });
 
 //Register
@@ -103,4 +106,4 @@ app.get("/admin/bookings", getAllBookingsForAdmin);
 
 //Start Server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, "0.0.0.0", () => console.log(`Server running on port ${PORT}`));
