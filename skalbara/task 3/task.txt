@@ -1,0 +1,1 @@
+We used minikube for this task to deploy our service locally instead of using Azure, we plan to use Azure for future tasks once we get it working. 
