@@ -1,1 +1,20 @@
-We used minikube for this task to deploy our service locally instead of using Azure, we plan to use Azure for future tasks once we get it working. 
+ Task 3
+
+• Whether you used AKS or Minikube?
+-Minikube was used as the Kubernetes environment.
+
+• How to deploy your application?
+-To deploy the application,First start the local Kubernetes cluster using Minikube. Run minikube start to initialize the cluster. 
+Next, a  Docker image needs to be build inside Minikube. 
+After switching the Docker environment, build the backend image using the command docker build -t hair-salon-app:1.0. This creates the application image that Kubernetes will later deploy.
+Once the image is ready, move to the Terraform directory by running terraform. Initialize Terraform with terraform init to download the required providers and set up the working directory. Then apply the configuration using terraform apply. When prompted, type yes to confirm the deployment.
+Terraform will then automatically create all the necessary Kubernetes resources. 
+
+
+• Where replicas are configured?
+-Replicas are configured inside the Terraform deployment, (replicas = 3) which means Kubernetes runs three identical Pods.
+
+• How Kubernetes performs load balancing in your setup?
+- Load balancing is handled automatically through a Service. When you create a Service, it looks for pods that match specific labels in this case, app = "hair-salon"—and groups them together.Once connected, the Service distributes incoming traffic evenly across all available pod replicas. 
+Kubernetes also continuously monitors the health of each Pod. Traffic is only sent to Pods that are running . If a pod crashes or is deleted, Kubernetes automatically creates a new one to replace it. In the meantime, the Service simply routes traffic to the remaining pods, so users don’t experience downtime.
+This provides fault tolerance and availability , making the application stay up even when individual components fail.
