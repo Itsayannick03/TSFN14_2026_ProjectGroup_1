@@ -1,8 +1,27 @@
 {
   "dependencies": {
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-toastify": "^11.0.5"
   },
-  "devDependencies": {
-    "eslint": "^10.0.2"
-  }
+  "name": "webb",
+  "version": "1.0.0",
+  "description": "A web application for booking hair salon appointments built with React and TypeScript.",
+  "main": "start.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Itsayannick03/Webb.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Itsayannick03/Webb/issues"
+  },
+  "homepage": "https://github.com/Itsayannick03/Webb#readme"
 }
