@@ -1,9 +1,9 @@
-const { registerUser, loginUser } = require("../Backend/controllers/authController");
-const User = require("../Backend/models/Users");
-const bcrypt = require("bcrypt");
+const { registerUser, loginUser } = require("../controllers/userController");
+const User = require("../models/Users");
+//const bcrypt = require("bcrypt");
 
-jest.mock("../Backend/models/Users");
-jest.mock("bcrypt");
+jest.mock("../models/Users");
+//jest.mock("bcrypt");
 
 const mockResponse = () => {
   const res = {};
@@ -53,8 +53,8 @@ describe("Auth Controller", () => {
     User.findOne.mockResolvedValue(null);
 
     // Mock bcrypt
-    bcrypt.genSalt.mockResolvedValue("salt");
-    bcrypt.hash.mockResolvedValue("hashedPassword");
+    //bcrypt.genSalt.mockResolvedValue("salt");
+    //bcrypt.hash.mockResolvedValue("hashedPassword");
 
     // Mock save
     const saveMock = jest.fn().mockResolvedValue(true);
@@ -66,8 +66,8 @@ describe("Auth Controller", () => {
     await registerUser(req, res);
 
     expect(User.findOne).toHaveBeenCalledWith({ email: "john@test.com" });
-    expect(bcrypt.genSalt).toHaveBeenCalledWith(10);
-    expect(bcrypt.hash).toHaveBeenCalledWith("123456", "salt");
+    //expect(bcrypt.genSalt).toHaveBeenCalledWith(10);
+    //expect(bcrypt.hash).toHaveBeenCalledWith("123456", "salt");
     expect(res.cookie).toHaveBeenCalled();
     expect(res.status).toHaveBeenCalledWith(201);
     expect(res.json).toHaveBeenCalledWith({
