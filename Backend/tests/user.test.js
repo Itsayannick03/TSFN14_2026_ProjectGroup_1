@@ -1,3 +1,5 @@
+
+
 const { registerUser, loginUser } = require("../controllers/userController");
 const User = require("../models/Users");
 //const bcrypt = require("bcrypt");
@@ -18,7 +20,7 @@ describe("Auth Controller", () => {
     jest.clearAllMocks();
   });
 
-  // ✅ 1️⃣ Test Missing Fields
+  // 1 Test Missing Fields
   it("should return 409 if required fields are missing", async () => {
     const req = {
       body: {
@@ -36,7 +38,7 @@ describe("Auth Controller", () => {
     });
   });
 
-  // ✅ 2️⃣ Test Successful Registration
+  //  2 Test Successful Registration
   it("should register user successfully", async () => {
     const req = {
       body: {
@@ -75,7 +77,7 @@ describe("Auth Controller", () => {
     });
   });
 
-  // ✅ 3️⃣ Test Login - User Not Found
+  // 3 Test Login - User Not Found
   it("should return 404 if login user not found", async () => {
     const req = {
       body: {
