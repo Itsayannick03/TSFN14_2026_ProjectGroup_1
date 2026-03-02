@@ -1,8 +1,61 @@
+
+# Resource Group (Sweden)
+
+resource "azurerm_resource_group" "rg" {
+  name     = "hair-salon-rg"
+  location = "Sweden Central"
+}
+
+
+# Azure Container Registry (ACR)
+
+resource "azurerm_container_registry" "acr" {
+  name                = "hairsalonacr12345" # MUST be globally unique
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  sku                 = "Basic"
+  admin_enabled       = false
+}
+
+
+# AKS Cluster
+
+resource "azurerm_kubernetes_cluster" "aks" {
+  name                = "hair-salon-aks"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  dns_prefix          = "hairsalon"
+
+  default_node_pool {
+    name       = "default"
+    node_count = 2
+    vm_size    = "Standard_DS2_v2"
+  }
+
+  identity {
+    type = "SystemAssigned"
+  }
+}
+
+
+# Allow AKS to Pull from ACR
+
+resource "azurerm_role_assignment" "acr_pull" {
+  principal_id         = azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
+  role_definition_name = "AcrPull"
+  scope                = azurerm_container_registry.acr.id
+}
+
+# Kubernetes Namespace
+
 resource "kubernetes_namespace" "app" {
   metadata {
     name = "hair-salon"
   }
 }
+
+
+# Kubernetes Deployment
 
 resource "kubernetes_deployment" "app" {
   metadata {
@@ -29,9 +82,9 @@ resource "kubernetes_deployment" "app" {
       spec {
         container {
           name  = "hair-salon-container"
-          image = "hair-salon:1.0"
+          image = "${azurerm_container_registry.acr.login_server}/hair-salon:1.0"
 
-          image_pull_policy = "Never"
+          image_pull_policy = "Always"
 
           port {
             container_port = 5000
@@ -40,7 +93,14 @@ resource "kubernetes_deployment" "app" {
       }
     }
   }
+
+  depends_on = [
+    azurerm_role_assignment.acr_pull
+  ]
 }
+
+
+# Kubernetes Service (Public LoadBalancer)
 
 resource "kubernetes_service" "app" {
   metadata {
@@ -58,6 +118,6 @@ resource "kubernetes_service" "app" {
       target_port = 5000
     }
 
-    type = "NodePort"
+    type = "LoadBalancer"
   }
 }
