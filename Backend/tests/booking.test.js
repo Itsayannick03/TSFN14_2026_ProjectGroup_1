@@ -6,7 +6,6 @@ const {
 
 const Booking = require('../models/Booking');
 const Service = require('../models/Service');
-const User = require('../models/Users');
 
 jest.mock('../models/Booking');
 jest.mock('../models/Service');

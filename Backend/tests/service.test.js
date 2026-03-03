@@ -1,6 +1,5 @@
 const { createService,getServices, deleteService } = require("../controllers/serviceController");
 const Service = require("../models/Service");
-const bcrypt = require("bcrypt");
 jest.mock("../models/Service");
 
 // test 1 - create a service 
