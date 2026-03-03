@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "jest"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -12,9 +12,6 @@
   "version": "1.0.0",
   "description": "A web application for booking hair salon appointments built with React and TypeScript.",
   "main": "start.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Itsayannick03/Webb.git"
@@ -26,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/Itsayannick03/Webb/issues"
   },
-  "homepage": "https://github.com/Itsayannick03/Webb#readme"
+  "homepage": "https://github.com/Itsayannick03/Webb#readme",
+  "devDependencies": {
+    "eslint-plugin-jest": "^29.15.0"
+  }
 }
