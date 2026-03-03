@@ -10,7 +10,7 @@ export default defineConfig([
     languageOptions: { 
       globals: {
         ...globals.node,
-        ...globals.jest 
+        ...globals.jest  // Add Jest globals
       } 
     } 
   },
@@ -20,7 +20,7 @@ export default defineConfig([
       sourceType: "commonjs" 
     } 
   },
-  
+  // Special configuration for test files
   {
     files: ["**/*.test.js", "**/*.spec.js"],
     languageOptions: {
