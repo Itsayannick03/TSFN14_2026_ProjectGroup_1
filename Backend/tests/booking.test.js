@@ -32,7 +32,7 @@ describe('Booking Controller - Mocked Unit Tests', () => {
     jest.clearAllMocks();
   });
 
-  // TEST 1 – selectService SUCCESS
+  // TEST 1 – selectService success 
   test('selectService should create cookie and return 201', async () => {
     req.body.services = ['serviceId1'];
 

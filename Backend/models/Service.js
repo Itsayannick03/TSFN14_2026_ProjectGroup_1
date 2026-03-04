@@ -17,8 +17,6 @@ const serviceSchema = new mongoose.Schema({
         type: Number,
         require: true,
     }
-
-
 });
 
 
