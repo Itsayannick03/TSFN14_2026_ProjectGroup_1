@@ -1,4 +1,4 @@
-```yml
+
 name: Build and push to ACR
 
 on:
@@ -37,4 +37,4 @@ jobs:
             ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:1.0
             ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
-```
+
