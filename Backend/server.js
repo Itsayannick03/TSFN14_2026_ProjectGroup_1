@@ -11,6 +11,7 @@ const {
   getUser,
   logout,
   updateUser,
+  healthCheck,
 } = require("./controllers/userController");
 const {
   selectService,
@@ -68,6 +69,7 @@ app.get("/", (req, res) => {
   
 });
 
+
 //Register
 app.post("/users/register", registerUser);
 
@@ -79,6 +81,8 @@ app.post("/users/logout", logout);
 
 //Get user names from Cookie
 app.get("/users", getUser);
+
+app.get("/health", healthCheck);
 
 app.put("/users", updateUser);
 

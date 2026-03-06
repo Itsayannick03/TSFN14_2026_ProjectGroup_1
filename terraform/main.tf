@@ -57,6 +57,7 @@ resource "kubernetes_namespace" "app" {
 
 # Kubernetes Deployment
 
+# Kubernetes Deployment with Probes and Resource Limits
 resource "kubernetes_deployment" "app" {
   metadata {
     name      = "hair-salon-deployment"
@@ -88,6 +89,51 @@ resource "kubernetes_deployment" "app" {
 
           port {
             container_port = 5000
+          }
+
+          # Resource requests and limits (required for HPA)
+          resources {
+            requests = {
+              cpu    = "250m"  # Request 250 milliCPU
+              memory = "128Mi"  # Request 128 MiB memory
+            }
+            limits = {
+              cpu    = "500m"   # Limit to 500 milliCPU
+              memory = "256Mi"   # Limit to 256 MiB memory
+            }
+          }
+
+          # Startup probe - checks if application has started
+          startup_probe {
+            http_get {
+              path = "/health"
+              port = 5000
+            }
+            failure_threshold = 30
+            period_seconds    = 10
+          }
+
+          # Readiness probe - checks if application is ready to receive traffic
+          readiness_probe {
+            http_get {
+              path = "/health"
+              port = 5000
+            }
+            initial_delay_seconds = 5
+            period_seconds        = 5
+            success_threshold     = 1
+            failure_threshold     = 3
+          }
+
+          # Liveness probe - checks if application is alive
+          liveness_probe {
+            http_get {
+              path = "/health"
+              port = 5000
+            }
+            initial_delay_seconds = 15
+            period_seconds        = 20
+            failure_threshold     = 3
           }
         }
       }
