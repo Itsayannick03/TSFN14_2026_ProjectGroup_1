@@ -1,5 +1,24 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/Users");
+const mongoose = require("mongoose");
+
+// Health check endpoint
+async function healthCheck(req, res) {
+  const ip = req.socket.remoteAddress;
+  console.log(`Health check performed from ${ip}`);
+  
+  // Check database connection (you already have mongoose imported)
+  const dbState = mongoose.connection.readyState;
+  
+  res.status(dbState === 1 ? 200 : 503).json({
+    status: dbState === 1 ? "healthy" : "unhealthy",
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    database: {
+      connected: dbState === 1
+    }
+  });
+}
 
 async function registerUser(req, res) {
   try {
@@ -187,4 +206,4 @@ async function logout(req, res) {
   }
 }
 
-module.exports = { registerUser, loginUser, getUser, logout, updateUser };
+module.exports = { registerUser, loginUser, getUser, logout, updateUser, healthCheck };
