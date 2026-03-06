@@ -42,3 +42,9 @@ dist/
 .env
 .env.*.local
 server/.env
+
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
