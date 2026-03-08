@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/Users");
+const mongoose = require("mongoose");
 
 // Health check endpoint
 async function healthCheck(req, res) {

@@ -167,7 +167,7 @@ resource "kubernetes_service" "app" {
 }
 
 # Horizontal Pod Autoscaler
-resource "kubernetes_horizontal_pod_autoscaler" "app" {
+resource "kubernetes_horizontal_pod_autoscaler_v2" "app" {
   metadata {
     name      = "hair-salon-hpa"
     namespace = kubernetes_namespace.app.metadata[0].name # Same namespace as our app
