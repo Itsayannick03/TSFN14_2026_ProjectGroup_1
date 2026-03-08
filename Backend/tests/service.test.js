@@ -18,7 +18,7 @@ test("should create service successfully", async () => {
       json: jest.fn(),
     };
 
-    // Mocka save()
+    // mock save
     Service.mockImplementation(() => ({
       save: jest.fn().mockResolvedValue(true),
     }));
@@ -35,7 +35,6 @@ test("should create service successfully", async () => {
 
 
 // test 2 cant find a service
-
 test("should return 500 if database fails", async () => {
   Service.find.mockRejectedValue(new Error("Database error"));
 
@@ -55,7 +54,6 @@ test("should return 500 if database fails", async () => {
 });
 
 // test 3 delete  service 
- 
 test("should delete service successfully", async () => {
     const req = {
       params: { id: "123" },
@@ -66,7 +64,7 @@ test("should delete service successfully", async () => {
       json: jest.fn(),
     };
 
-    // Mocka att service hittas och tas bort
+    // mock service
     Service.findByIdAndDelete.mockResolvedValue({
       _id: "123",
       name: "Haircut",
