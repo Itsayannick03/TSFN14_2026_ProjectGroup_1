@@ -55,8 +55,6 @@ resource "kubernetes_namespace" "app" {
 }
 
 
-# Kubernetes Deployment
-
 # Kubernetes Deployment with Probes and Resource Limits
 resource "kubernetes_deployment" "app" {
   metadata {

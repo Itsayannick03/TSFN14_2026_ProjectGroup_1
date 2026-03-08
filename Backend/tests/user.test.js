@@ -5,7 +5,7 @@ const User = require("../models/Users");
 const bcrypt = require("bcrypt");
 jest.mock("../models/Users");
 
-  // 1 Test Missing Fields
+  // test 1 missing fields
   test("should return 409 if required fields are missing", async () => {
     const req = {
       body: {
@@ -27,7 +27,7 @@ jest.mock("../models/Users");
     });
   });
 
-  //  2 Test Successful Registration
+  //  test 2 successful registration
   test("should register user successfully", async () => {
     const req = {
       body: {
@@ -44,14 +44,14 @@ jest.mock("../models/Users");
       cookie: jest.fn(),
     };
 
-     //  Mocka att användaren inte finns
+     //  mock user does not exist
     User.findOne = jest.fn().mockResolvedValue(null);
 
-    //  Mocka bcrypt, för lösenord
+    //  mock password
     bcrypt.genSalt = jest.fn().mockResolvedValue("salt");
     bcrypt.hash = jest.fn().mockResolvedValue("hashedPassword");
 
-    //  Mock new User().save()
+    //  mock new user
     User.mockImplementation(() => ({
       save: jest.fn().mockResolvedValue(true),
       id: "123",
@@ -66,7 +66,7 @@ jest.mock("../models/Users");
     });
   });
 
-  // 3 Test Login - User Not Found
+  // test 3 login 
   test("should return 404 if login user not found", async () => {
     const req = {
       body: {

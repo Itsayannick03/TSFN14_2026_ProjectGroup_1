@@ -32,7 +32,7 @@ describe('Booking Controller - Mocked Unit Tests', () => {
     jest.clearAllMocks();
   });
 
-  // TEST 1 – selectService success 
+  // test 1 – selectService success 
   test('selectService should create cookie and return 201', async () => {
     req.body.services = ['serviceId1'];
 
@@ -46,7 +46,7 @@ describe('Booking Controller - Mocked Unit Tests', () => {
     expect(res.json).toHaveBeenCalledWith({ error: "Created new service" });
   });
 
-  //  TEST 2 – selectService FAIL (service not found)
+  //  test 2 – selectService fail 
   test('selectService should return 401 if service does not exist', async () => {
     req.body.services = ['badId'];
 
@@ -58,7 +58,7 @@ describe('Booking Controller - Mocked Unit Tests', () => {
     expect(res.json).toHaveBeenCalledWith({ error: "Service not found" });
   });
 
-  //  TEST 3 – createBooking SUCCESS
+  //  test 3 – createBooking success
   test('createBooking should create new booking successfully', async () => {
     const fakeDate = new Date().toISOString();
 
@@ -81,7 +81,7 @@ describe('Booking Controller - Mocked Unit Tests', () => {
     expect(res.json).toHaveBeenCalledWith({ message: "Booking created" });
   });
 
-  // TEST 4 – selectDate FAIL (date already booked)
+  // test 4 – selectDate fail
   test('selectDate should return 400 if date already booked', async () => {
     const date = new Date().toISOString();
     req.body.date = date;
