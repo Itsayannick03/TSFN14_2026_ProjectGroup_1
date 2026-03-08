@@ -1,0 +1,16 @@
+How Kubernetes knows whether your service is healthy:
+Kubernetes checks the health of our application by using probes. There are three types of probes that we use. 
+1. Liveness probe: This tells kubernetees if the container is alive, if it fails Kuberenetes will kill the container and restart it. 
+2. Readiness probe: This tells Kubernetes if the container is ready to receive traffic, if it fails the traffic to that pod stops. 
+3. Startup probe: This prevents applications that start slow to be killed by the liveness probe, it delays liveness checks until it has fully started.
+
+When scaling occurs:
+Scaling happens in two ways:
+1. Manual scaling: This happens when 
+2. Automatic scaling: This happens when our horizontal pod autoscaler automatically changes the number of pods. 
+In our case it automatically changes when the CPU is over 50% or the memory is over 70%.
+
+Why scaling occurs:
+1. To handle more load: If we get more users we need more pods to keep up.
+2. To reduce costs: If we scale down when there is not that much traffic we save resources and money.
+3. Prepare for high traffic: We can scale up before if we know a large amount of people will use our website.
