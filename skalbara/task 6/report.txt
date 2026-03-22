@@ -1,1 +1,49 @@
+Task 6 – Load Testing and Performance Observation
+Test Setup
+
+The load testing was done using Apache JMeter. The goal was to see how the backend service behaves when the number of users increases.
+I tested the /health endpoint because it is a simple and realistic request that checks if the system is running. The same endpoint was used both locally and on Azure so the results could be compared.
+The only difference between the tests was the URL:
+Local: http://localhost:5000/health
+Azure: http://74.241.233.129:5000/health
+
+We tested three different levels of load:
+5 users
+10 users
+20 users
+Each user sent multiple requests, and the load increased gradually.
+
+
+
+Key Observations
+
+Local 
+When running locally, the system was very fast:
+Response time was around 4–10 ms
+No errors occurred
+The system handled all requests easily
+
+Azure Testing
+When running on Azure, the system was still stable but a bit slower:
+Response time was around 23–26 ms
+A small number of errors appeared in higher load (about 0.7%)
+Some very high max response times occurred which is possibly delays.
+
+
+
+Analysis and Reflection
+
+The results show that the system works well under load, however, there are some differences:
+Azure is slower than local because of network delay and cloud infrastructure
+Some response time spikes happened in Azure, which may be caused by resource limits or temporary delays
+A few errors appeared when the load increased
+No scaling was observed during the test. This is probably because the health endpoint is very lightweight
+CPU and memory usage did not reach the limits required to trigger scaling.
+
+
+Counslusion
+
+The system is faster locally than in Azure. Response time increases slightly with more users
+Simple endpoints do not stress the system much, scaling does not happen unless the load is high enough
+Overall, the system performed well, and the test gave a better understanding of performance and cloud behavior.
 
