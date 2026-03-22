@@ -1,4 +1,4 @@
-Task 6 – Load Testing and Performance Observation
+Task 6 – Load Testing 
 Test Setup
 
 The load testing was done using Apache JMeter. The goal was to see how the backend service behaves when the number of users increases.
