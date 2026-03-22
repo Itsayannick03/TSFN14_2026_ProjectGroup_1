@@ -30,9 +30,21 @@ A small number of errors appeared in higher load (about 0.7%)
 Some very high max response times occurred which is possibly delays.
 
 
+Relation to Task 2
+In Task 2, the system was designed to prevent double booking by handling multiple users at the same time in the backend.
+The load test shows that the system can handle multiple requests without errors, which supports this design.
+However, since only the /health endpoint was tested, the load was very low. A real booking endpoint would create more stress on the system and better show how it handles concurrency.
+
+
+Relation to Task 5
+In Task 5, monitoring and scaling were set up using Kubernetes and HPA.
+During the load test, no scaling occurred because the /health endpoint is very lightweight and did not use enough resources.
+The system stayed stable and all pods were running correctly, which shows that the monitoring setup works.
+Scaling would likely happen with heavier load.
+
+
 
 Analysis and Reflection
-
 The results show that the system works well under load, however, there are some differences:
 Azure is slower than local because of network delay and cloud infrastructure
 Some response time spikes happened in Azure, which may be caused by resource limits or temporary delays
