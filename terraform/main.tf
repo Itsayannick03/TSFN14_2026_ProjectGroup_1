@@ -60,6 +60,10 @@ resource "kubernetes_deployment" "app" {
   metadata {
     name      = "hair-salon-deployment"
     namespace = kubernetes_namespace.app.metadata[0].name
+    labels = {
+      app = "hair-salon"
+      version = "v1"
+    }
   }
 
   spec {
@@ -87,18 +91,35 @@ resource "kubernetes_deployment" "app" {
 
           port {
             container_port = 5000
+            name           = "http"
           }
 
           # Used for health probes to calculate how many procent needs to be used and can be used
           resources {
             requests = {
               cpu    = "250m" # 250 miliCPU
-              memory = "128Mi"  # 128 MiB 
+              memory = "256Mi"  # 128 MiB 
             }
             limits = {
               cpu    = "500m"   # Max 500 milliCPU
-              memory = "256Mi"   # Max 256 MiB memory
+              memory = "512Mi"   # Max 256 MiB memory
             }
+          }
+
+           # Environment variables for logging
+          env {
+            name  = "LOG_LEVEL"
+            value = "info"
+          }
+          
+          env {
+            name  = "NODE_ENV"
+            value = "production"
+          }
+
+          env {
+            name  = "PORT"
+            value = "5000"
           }
 
           # Startup probe, checks if application has started
@@ -183,26 +204,60 @@ resource "kubernetes_horizontal_pod_autoscaler_v2" "app" {
       kind        = "Deployment"
       name        = kubernetes_deployment.app.metadata[0].name 
     }
-  # If CPU more than 50% scale up
+  # If CPU more than 70% scale up
     metric {
       type = "Resource"
       resource {
         name = "cpu"
         target {
           type                = "Utilization"
-          average_utilization = 50 # 50% CPU across all pods
+          average_utilization = 70 # 70% CPU across all pods
         }
       }
     }
-  # If memory more than 70% scale up
+  # If memory more than 80% scale up
     metric {
       type = "Resource"
       resource {
         name = "memory"
         target {
           type                = "Utilization"
-          average_utilization = 70
+          average_utilization = 80
         }
+      }
+    }
+
+    behavior {
+      # scale down 
+      scale_down {
+        stabilization_window_seconds = 300  # wait 5 minutes before scaling down
+        policy {
+          type          = "Pods"
+          value         = 1
+          period_seconds = 60  # remove max 1 pod per minute
+        }
+        policy {
+          type          = "Percent"
+          value         = 10
+          period_seconds = 60  # remove max 10% of pods per minute
+        }
+        select_policy = "Min"  
+      }
+
+      # scale up
+      scale_up {
+        stabilization_window_seconds = 0   # scale up immediately
+        policy {
+          type          = "Pods"
+          value         = 2
+          period_seconds = 15  # add up to 2 pods every 15 seconds
+        }
+        policy {
+          type          = "Percent"
+          value         = 100
+          period_seconds = 15  # double the pods every 15 seconds
+        }
+        select_policy = "Max"  # adds more pods
       }
     }
   }
